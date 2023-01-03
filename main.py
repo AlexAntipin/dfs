@@ -44,20 +44,59 @@ class Graph:
 
 
 
+class Node:
+
+    def __init__(self, value):
+        self.left = None
+        self.right = None
+        self.value = value
+
+    def insertNode(self, value):
+        if self.value:
+            if value < self.value:
+                if self.left is None:
+                    self.left = Node(value)
+                else:
+                    self.left.insertNode(value)
+            elif value > self.value:
+                if self.right is None:
+                    self.right = Node(value)
+                else:
+                    self.right.insertNode(value)
+        else:
+            self.value = value
+
+    def PrintTree(self):
+        if self.left:
+            self.left.PrintTree()
+        print(self.value)
+        if self.right:
+            self.right.PrintTree()
 
 
 
+root = Node(10)
+root.insertNode(6)
+root.insertNode(7)
+root.insertNode(14)
+root.insertNode(5)
+root.insertNode(18)
+
+root.PrintTree()
 with open('Graph.txt', 'r') as graph:
     matrix = []
     for i in graph.readlines():
         matrix.append(list(map(int,(i[:-1].split()))))
 
 
-a = Graph(matrix)
-a.print_graph()
-a.dfs(1,[])
-print('Обход в ширину')
-a.bfs(3, [], [])
+# a = Graph(matrix)
+# a.print_graph()
+# a.dfs(1,[])
+# print('Обход в ширину')
+# a.bfs(3, [], [])
+#
+# print('Hello world')
 
-print('Hello world')
+
+
 
